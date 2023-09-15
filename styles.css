@@ -1,8 +1,22 @@
 body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+h1 {
+    display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 100px;
+}
+
+button {
+    background-color: white;
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
 }
 
 .squares {
@@ -11,4 +25,48 @@ body {
     height: 560px;
     flex-wrap: wrap;
     border: solid 2px;
+}
+
+.main {
+    min-width: 100vh;
+    display: flex;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.color-picker {
+    display: flex;
+    align-items: center;
+    width: 160px;
+    height: 40px;
+}
+
+.color-picker > input {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    width: 70px;
+    height: 40px;
+    padding: 0;
+}
+
+.color-picker > span {
+    box-sizing: border-box;
+    width: 90px;
+    padding-left: 4px;
+}
+
+#slider {
+    width: 160px;
+}
+
+.grid-container {
+    flex: 2;
 }
