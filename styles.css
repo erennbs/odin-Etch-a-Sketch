@@ -1,0 +1,14 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.squares {
+    display: flex;
+    width: 560px;
+    height: 560px;
+    flex-wrap: wrap;
+    border: solid 2px;
+}
