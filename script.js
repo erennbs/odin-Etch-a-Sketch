@@ -1,32 +1,51 @@
+// =================================== Setting Grid ========================================
 const squaresDiv = document.querySelector('.squares');
 const squaresDivHeight = squaresDiv.clientHeight;
 
 squaresDiv.addEventListener('mousedown', onContainerMouseDown);
 squaresDiv.addEventListener('mouseup', onContainerMouseUp);
 
-// ================================= Setting Color Inputs ===================================
+// ================================= Setting Color Inputs ==================================
 const colorInputs = document.querySelectorAll('input[type="color"]');
 
-colorInputs[0].addEventListener('change', (e) => {currentPenColor = e.target.value})
-colorInputs[1].addEventListener('change', (e) => {currentBackgroundColor = e.target.value})
+colorInputs[0].addEventListener('change', (e) => {currentPenColor = e.target.value});
 
 let currentPenColor = colorInputs[0].value;
 let currentBackgroundColor = colorInputs[1].value; 
-// ========================================================================================== 
 
+// ================================= Setting Clear Button ==================================
+const clearButton = document.querySelector('#clear-button');
+clearButton.addEventListener('click', clearGrid);
 
-function createGrid(size, color) {
-    for (let i = 0; i < 16; i++) {
-        for(let j = 0; j < 16; j++) {
-            let grid = document.createElement('div');
+// ================================= Setting Pen and Eraser ================================
+const penEraserButtons = document.querySelectorAll('.only-one');
 
-            grid.classList.add('grid');
-            grid.style.width = `${squaresDivHeight/size}px`;
-            grid.style.height = `${squaresDivHeight/size}px`;
-            
-            squaresDiv.appendChild(grid);
-        }
+let mode = 'pen';
+
+penEraserButtons.forEach(button => button.addEventListener('click', onMouseClickPenEraserButton))
+
+function createGrid(size) {
+    for (let i = 0; i < size * size; i++) {
+        let grid = document.createElement('div');
+
+        grid.classList.add('grid');
+        grid.style.width = `${squaresDivHeight/size}px`;
+        grid.style.height = `${squaresDivHeight/size}px`;
+        
+        squaresDiv.appendChild(grid);
     }
+}
+
+function clearGrid() {
+    let grids = squaresDiv.childNodes;
+    currentBackgroundColor = colorInputs[1].value;
+    if(mode === 'eraser') {
+        currentPenColor = currentBackgroundColor;
+    }
+
+    grids.forEach(grid => {
+        grid.style.backgroundColor = currentBackgroundColor;
+    });
 }
 
 function onContainerMouseDown(e) {
@@ -46,6 +65,17 @@ function onMouseMoveOverContainer(e) {
 
     let grid = e.target;
     grid.style.backgroundColor = currentPenColor;
+}
+
+function onMouseClickPenEraserButton(e) {
+    mode = e.target.value;
+    penEraserButtons.forEach(button => button.classList.remove('selected'));
+    e.target.classList.add('selected');
+    if(mode === 'pen') {
+        currentPenColor = colorInputs[0].value;
+    } else if(mode === 'eraser') {
+        currentPenColor = currentBackgroundColor;
+    }
 }
 
 createGrid(16, currentBackgroundColor);
