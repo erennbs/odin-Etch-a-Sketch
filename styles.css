@@ -47,6 +47,12 @@ h1 {
 
 .grid {
     background-color: white;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .main {
@@ -91,6 +97,7 @@ h1 {
     box-sizing: border-box;
     width: 90px;
     padding-left: 4px;
+    color: #3e3e3e;
 }
 
 #slider {

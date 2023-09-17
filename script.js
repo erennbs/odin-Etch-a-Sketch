@@ -39,7 +39,6 @@ function createGrid(size) {
         let grid = document.createElement('div');
 
         grid.classList.add('grid');
-        grid.setAttribute('draggable', 'false');
         grid.style.width = `${squaresDivHeight/size}px`;
         grid.style.height = `${squaresDivHeight/size}px`;
         grid.classList.add('grid');
