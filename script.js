@@ -14,8 +14,8 @@ let currentPenColor = colorInputs[0].value;
 let currentBackgroundColor = colorInputs[1].value; 
 
 // ================================= Setting Clear Button ==================================
-const clearButton = document.querySelector('#clear-button');
-clearButton.addEventListener('click', clearGrid);
+const clearButton = document.querySelector('#refresh-button');
+clearButton.addEventListener('click', refreshGrid);
 
 // ================================= Setting Pen and Eraser ================================
 const penEraserButtons = document.querySelectorAll('.only-one');
@@ -24,19 +24,31 @@ let mode = 'pen';
 
 penEraserButtons.forEach(button => button.addEventListener('click', onMouseClickPenEraserButton))
 
+// ================================= Setting Slider =======================================
+const slider = document.querySelector('#slider');
+const sliderLabel = document.querySelector('#slider-label');
+
+let size = slider.value;
+
+slider.addEventListener('mousemove', (e) => {sliderLabel.textContent = `${e.target.value} x ${e.target.value}`})
+slider.addEventListener('mouseup', onSizeChange);
+
+
 function createGrid(size) {
     for (let i = 0; i < size * size; i++) {
         let grid = document.createElement('div');
 
         grid.classList.add('grid');
+        grid.setAttribute('draggable', 'false');
         grid.style.width = `${squaresDivHeight/size}px`;
         grid.style.height = `${squaresDivHeight/size}px`;
+        grid.classList.add('grid');
         
         squaresDiv.appendChild(grid);
     }
 }
 
-function clearGrid() {
+function refreshGrid() {
     let grids = squaresDiv.childNodes;
     currentBackgroundColor = colorInputs[1].value;
     if(mode === 'eraser') {
@@ -46,6 +58,16 @@ function clearGrid() {
     grids.forEach(grid => {
         grid.style.backgroundColor = currentBackgroundColor;
     });
+}
+
+function onSizeChange(e) {
+    size = e.target.value;
+
+    while (squaresDiv.firstChild) {
+        squaresDiv.removeChild(squaresDiv.firstChild);
+    }
+
+    createGrid(size)
 }
 
 function onContainerMouseDown(e) {

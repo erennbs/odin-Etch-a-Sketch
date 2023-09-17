@@ -13,20 +13,25 @@
         
 		<div class="main">
 			<div class="options">
-				<div class="color-picker">	
-					<input type="color">
-					<span>Color</span>
+				<div class="container">
+					<div class="color-picker">	
+						<input type="color">
+						<span>Color</span>
+					</div>
+					<div class="color-picker">	
+						<input type="color" value="#FFFFFF">
+						<span> Background</span>
+					</div>
+					<button id="pen-button" class="only-one selected" value="pen">Pen</button>
+					<button id="eraser-button" class="only-one" value="eraser">Eraser</button>
+					<button id="refresh-button">Refresh</button>
+					<div class="slider-container">
+						<input type="range" min="8" max="64" value="16" id="slider">
+						<span id="slider-label">16 x 16</span>
+					</div>
 				</div>
-				<div class="color-picker">	
-					<input type="color" value="#FFFFFF">
-					<span> Background</span>
-				</div>
-				<button id="pen-button" class="only-one" value="pen">Pen</button>
-				<button id="eraser-button" class="only-one" value="eraser">Eraser</button>
-				<button id="clear-button">Clear</button>
-				<input type="range" min="16" max="64" id="slider">
 			</div>
-			<div class="grid-container">
+			<div class="grid-container" draggable="false">
 				<div class="squares"></div>
 			</div>
 		</div>
